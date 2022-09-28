@@ -1,0 +1,32 @@
+<h1>search for jobs</h1>
+
+<form action="/jobsapi/jobs" method="POST">
+   
+
+    <input type="radio" id="pass"  name="radio" value="nodejs">
+    <label for="pass">NodeJS</label>
+     <input type="radio" id="fail" name="radio" value="reactjs">
+     <label for="fail">React</label>
+
+
+<input type="submit" value="search">
+
+</form>
+
+<% if(jobs){ %>
+<ul>
+<% for(job of jobs){ %>
+<li>
+
+<p> Job Description: <%= job.summary %> ,</p> 
+<p> Company: <%= job.company %>, </p>
+<p> Location: <%= job.location %>, </p>
+<p> Date of post: <%= job.postDate %>, </p>
+<p> Salary: <%= job.salary %> </p>
+
+</li>
+
+    <% } %>
+
+</ul>
+<% } %>

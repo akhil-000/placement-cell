@@ -1,0 +1,49 @@
+<h1>
+    Students
+</h1>
+
+
+<section id="feed-students">
+   
+   
+    <form action="/students/create" id="new-post-form" method="POST">
+        <input type="text" name="studentid" placeholder="studentid" required>
+        <input type="text" name="studentname" placeholder="studentname" required>
+        <input type="text" name="studentstatus" placeholder="studentstatus" required>
+        <input type="text" name="webD" placeholder="webD" required>
+        <input type="text" name="React" placeholder="React" required>
+        <input type="text" name="DSA" placeholder="DSA" required>
+        <input type="text" name="Batch" placeholder="Batch" required>
+
+        <input type="submit" value="ADD">
+    </form>
+
+    <h4>Students</h4>
+
+    <div id="students-list-container">
+        <ul>
+            <% for(student of students){ %>
+                
+            <li>
+                <p>
+                   
+                    <small>
+                        <a href="/students/destroy/<%= student.id %>">X</a>
+                    </small>
+                    <%= student.studentid %>
+                    <%= student.studentname %>
+                    <%= student.studentstatus %>
+                    <%= student.batch %>
+                    <%= student.WebD %>
+                    <%= student.DSA %>
+                    <%= student.React %>
+
+                </p>
+                
+                
+            </li>
+                
+            <%} %>
+        </ul>
+    </div>
+</section>

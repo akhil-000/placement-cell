@@ -1,0 +1,44 @@
+<header id="layout-header">
+    <nav>
+        <div class="mini-logo">
+            <% if (locals.user){ %>
+            <p>
+                <a href='/users/student'>
+                    Students
+                </a>
+            </p>
+            <%}%>
+        </div>
+    
+        <div class="auth-links">
+            <ul>
+                <% if (locals.user){ %>
+                <li>
+                    <a href="/jobsapi/jobspage"> jobs</a>
+                </li>
+                <li>
+                    <a href="/users/interview">interviews</a>
+                </li>
+                <li>
+                    <a href="/users/sign-out">Sign Out</a>
+                </li>
+                <% }if (locals.employee){ %>
+                <li>
+                    <a href="/users/sign-in">Sign In</a>
+                </li>
+                <li>
+                    <a href="/users/sign-up">Sign Up</a>
+                </li>
+        
+               
+
+                <% } %>
+
+                  
+            </ul>
+        </div>
+    </nav>
+ 
+
+
+</header>

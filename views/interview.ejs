@@ -1,0 +1,179 @@
+<h1>
+ Interviews
+</h1>
+
+
+<section id="feed-interviews">
+   
+    <form action="/interviews/create" id="new-post-form" method="POST">
+        <input type="text" name="companyname" placeholder="Type Here to add company..." required>
+        <input type="date" name="date"  required> 
+        <input type="submit" value="Create">
+    </form>
+
+    <h4>interviews</h4>
+    <div id="students-list-container">
+        <ul>
+            <% for(interview of interviews){ %>
+                
+            <li>
+                <form class="item1"  tabindex="0"    action="/interviews/push" method="POST">
+
+                    <small>
+                        <a href="/interviews/destroy/<%= interview.id %>">X</a>
+                    </small>
+            
+                    <select name="studentnames" id="studentnames" required>
+                        <option value="" selected="selected"> select student</option>
+                        <% for(var i=0;i< students.length;i++ ){ %>
+                            <option value=<%=students[i].id %>><%=students[i].studentname %></option>
+                        
+                            <% } %>         
+                    </select>    
+
+                    <select name="interviewnames" id="interviewnames">
+                        <option  selected="selected"   value= <%= interview.id %> > <%= interview.companyname %> <%= interview.date %></option>       
+                    </select>
+
+                    <input type="submit" value="ADD">
+
+                </form>
+
+
+                <ul class="item2 "  tabindex="0"   >
+                  
+                    <%for(var i=0; i< interview.student.length ;i++){ %>
+                        <li>   
+                
+                 
+                        <form action="/results/create" method="POST">
+                        <p><%= interview.student[i].studentname %></p>
+
+                        <input type="hidden" name="radio" value= <%= interview.student[i].id %>>
+                        <input type="hidden" name="radio" value= <%= interview.id %>>
+
+
+                        <% for(result of results){ %>
+
+
+
+                            <% if(result.interview.id==interview.id && result.student.id==interview.student[i].id){%>  
+                        
+                        
+                                <% if(result.status=="pass"){%>
+                                    <input type="radio" id="pass"  name="radio" value="pass" required checked>
+                                    <label for="pass">PASS</label>
+            
+                                    <input type="radio" id="fail" name="radio" value="fail" required >
+                                    <label for="fail">FAIL</label>
+            
+                                    <input type="radio" id ="on hold" name="radio" value="on hold" required >
+                                    <label for="on hold">ON HOLD</label>
+            
+                                    <input type="radio" id="didnot attempt" name="radio" value="didnot attempt" required >
+                                    <label for="didnot attempt">DIDNOT ATTEMPT</label>
+                                    
+            
+                                    
+            
+                                    <%}else if(result.status=="fail"){%>
+                                            <input type="radio" id="pass"  name="radio" value="pass" required >
+                                            <label for="pass">PASS</label>
+            
+                                            
+                                            <input type="radio" id="fail" name="radio" value="fail" checked>
+                                            <label for="fail">FAIL</label>
+            
+                                            <input type="radio" id ="on hold" name="radio" value="on hold" required >
+                                            <label for="on hold">ON HOLD</label>
+            
+                                            <input type="radio" id="didnot attempt" name="radio" value="didnot attempt" required >
+                                            <label for="didnot attempt">DIDNOT ATTEMPT</label>
+            
+                                    
+            
+                                    <%}else if(result.status=="on hold"){%>
+            
+            
+                                        <input type="radio" id="pass"  name="radio" value="pass" required >
+                                        <label for="pass">PASS</label>
+            
+                                        <input type="radio" id="fail" name="radio" value="fail" required >
+                                        <label for="fail">FAIL</label>
+            
+                                     <input type="radio" id ="on hold" name="radio" value="on hold" checked>
+                                     <label for="on hold">ON HOLD</label>
+            
+                                        <input type="radio" id="didnot attempt" name="radio" value="didnot attempt" required >
+                                    <label for="didnot attempt">DIDNOT ATTEMPT</label>
+                                     
+                                     
+                                    <%}else if(result.status=="didnot attempt"){%>
+            
+                                        <input type="radio" id="pass"  name="radio" value="pass" required >
+                                        <label for="pass">PASS</label>
+            
+                                        <input type="radio" id="fail" name="radio" value="fail" required >
+                                        <label for="fail">FAIL</label>
+            
+                                        <input type="radio" id ="on hold" name="radio" value="on hold" required >
+                                        <label for="on hold">ON HOLD</label>
+            
+                                     <input type="radio" id="didnot attempt" name="radio" value="didnot attempt" checked>
+                                     <label for="didnot attempt">DIDNOT ATTEMPT</label>
+                                     <%}%> 
+            
+                                     <% } %>  
+            
+                                        <% } %>  
+                                        
+
+                                            
+                                           
+                        <% var count=0;  results.forEach(result=>{%> 
+
+                            <%   if(result.student.id!=interview.student[i].id || result.interview.id != interview.id){ %>
+                                <% count++ %>
+                                <% }%>                                   
+                                  <% })%>
+                           
+                                                 
+                                  <%     if(count== results.length)  { %>        
+                                            <input type="radio" id="pass"  name="radio" value="pass" required >
+                                            <label for="pass">PASS</label>
+            
+                                            <input type="radio" id="fail" name="radio" value="fail" required >
+                                            <label for="fail">FAIL</label>
+            
+                                            <input type="radio" id ="on hold" name="radio" value="on hold" required >
+                                            <label for="on hold">ON HOLD</label>
+            
+                                            <input type="radio" id="didnot attempt" name="radio" value="didnot attempt" required >
+                                            <label for="didnot attempt">DIDNOT ATTEMPT</label>
+                                            <% }%>                                   
+
+                                            
+                                                
+
+                         <input type="submit" value="set">
+                    </form>
+               
+            </li>
+           
+                    <% }%>
+                </ul>       
+            
+            </li>
+                
+            <%} %>
+        </ul>
+    </div>
+</section>
+
+<form action="/interviews/write" method="get">
+    <button type="submit">create File</button>
+</form>
+
+<form action="/download" method="get">
+    <button type="submit">Download File</button>
+</form>
