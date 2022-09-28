@@ -15,8 +15,6 @@
 
 <br />7)Run your server
 <br />8) Visit your (local) website!
-<br /> 9) &nbsp; &nbsp; 
-
 
 
 
